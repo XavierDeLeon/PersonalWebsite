@@ -1,0 +1,23 @@
+.Header {
+  text-align: center;
+}
+
+.Header-site {
+  background-color: #040f0f;
+  color: #f5fbef;
+  font-size: calc(50px + 2vmin);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Header-text{
+  margin-bottom: 0;
+}
+
+.Header-scroll-for-more {
+  margin-top: 0;
+  font-size: calc(10px + 2vmin);
+}

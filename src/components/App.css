@@ -1,8 +1,12 @@
 .App{
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    /* IE, Firefox, Edge */
+    /* -ms-overflow-style: none;  
+    scrollbar-width: none; */
+    background-color: #040f0f;
+    color: #f5fbef;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+    /*Chrome*/
+    /* display: none; */
 }

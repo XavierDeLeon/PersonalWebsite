@@ -1,0 +1,17 @@
+.About {
+  text-align: center;
+  background-color: #040f0f;
+  color: #f5fbef;
+  min-height: 100vh;
+}
+
+.About h1 {
+  font-size: calc(50px + 2vmin);
+  margin-top: 0;
+}
+
+.About p {
+    text-align: left;
+    font-size: calc(8px + 2vmin);
+    padding: 0px calc(10px + 2vmin)
+}

@@ -1,10 +1,10 @@
 .Header {
   text-align: center;
+  background-color: #040f0f;
+  color: #f5fbef;
 }
 
 .Header-site {
-  background-color: #040f0f;
-  color: #f5fbef;
   font-size: calc(50px + 2vmin);
   min-height: 100vh;
   display: flex;

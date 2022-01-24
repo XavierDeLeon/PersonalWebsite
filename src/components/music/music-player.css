@@ -1,15 +1,23 @@
+.music-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .music-player {
     display: flex;
     flex-direction: row;
+    align-self: center;
     align-items: center;
     justify-content: space-evenly;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
 }
 
 .left-arrow, .right-arrow {
     width: 25%;
     font-size: calc(36px + 2vmin);
+    user-select: none;
 }
 
 .left-arrow:hover, .right-arrow:hover {
@@ -21,10 +29,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     width: 50%;
-    height: 100%;
-    background-image: url("../../assets/images/A-Place-to-Call-Home.jpg");
+    max-height: 750px;
+    max-width: 750px;
 }
 
 .player img {
@@ -41,5 +49,21 @@
     bottom: 0;
 }
 
-.player img {
+.music-player-details {
+    width: 50%;
+    text-align: left;
+}
+
+.music-player-details h2{
+    margin-top: 0;
+    font-size: calc(24px + 2vmin);
+}
+
+.music-player-details h3{
+    margin-top: 60px;
+    font-size: calc(20px + 2vmin);
+}
+
+.music-player-details p {
+    font-size: calc(6px + 2vmin);
 }

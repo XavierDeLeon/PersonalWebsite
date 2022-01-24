@@ -1,3 +1,118 @@
 .App{
-  
+    /* IE, Firefox, Edge */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+    background-color: #040f0f;
+    color: #f5fbef;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
+
+.next-page-arrow, .previous-page-arrow {
+    font-size: calc(100px + 2vmin);
+    color: #918D91;
+    width: 10%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.previous-page-arrow:hover {
+    font-size: calc(150px + 2vmin);
+    color: #f5fbef;
+}
+
+.next-page-arrow:hover {
+    font-size: calc(150px + 2vmin);
+    color: #f5fbef;
+}
+
+::-webkit-scrollbar {
+    /*Chrome*/
+    display: none;
+}
+
+.Header {
+    text-align: center;
+  }
+  
+  .Header-site {
+    font-size: calc(50px + 2vmin);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .Header-text{
+    margin-bottom: 0;
+  }
+  
+  .Header-scroll-for-more {
+    margin-top: 0;
+    font-size: calc(10px + 2vmin);
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .Header-caret-down-block{
+    font-size: calc(5px + 2vh);
+  }
+  
+  .Header-caret-right-1{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: calc(10px + 2vmin);
+    animation: flickerAnimation 1s infinite;
+  }
+  
+  .Header-caret-right-2{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: calc(10px + 2vmin);
+    animation: flickerAnimation 1s infinite;
+    animation-delay: 0.1s;
+  }
+  
+  .Header-caret-right-3{
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: calc(10px + 2vmin);
+    animation: flickerAnimation 1s infinite;
+    animation-delay: 0.2s;
+  }
+  
+  @keyframes flickerAnimation {
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-o-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-moz-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-webkit-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  
+  .animate-flicker {
+     -webkit-animation: flickerAnimation 1s infinite;
+     -moz-animation: flickerAnimation 1s infinite;
+     -o-animation: flickerAnimation 1s infinite;
+      animation: flickerAnimation 1s infinite;
+  }
+  

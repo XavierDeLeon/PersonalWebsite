@@ -10,6 +10,7 @@ import cometImgUrl from "../../assets/images/Comet.jpg"
 // Smile
 import smileUrl from "../../assets/audio/Smile.mp3"
 import smileImgUrl from "../../assets/images/Smile.jpg"
+import Visualizer from "./visualizer";
 
 export default function MusicPlayer() {
 
@@ -53,9 +54,9 @@ export default function MusicPlayer() {
         }
     });
 
-    const initVisualizer = () => {
-        visualizeAudio(document.getElementById("src"), document.getElementById("visualizer"));
-    }
+    // const initVisualizer = () => {
+    //     visualizeAudio(document.getElementById("src"), document.getElementById("visualizer"));
+    // }
 
     const playOrStop = () => {
         if (document.getElementById("src").paused){
@@ -95,7 +96,7 @@ export default function MusicPlayer() {
                         }} 
                         onClick={playOrStop}
                     >
-                        <audio id="src" src={songArr[songIndex]["audio"]} onPlay={initVisualizer} controls/>
+                        <audio id="src" src={songArr[songIndex]["audio"]} controls/>
                     </div>
                     <div className="right-arrow" onClick={nextSong}>&#x2192;</div>
                 </div>
@@ -105,61 +106,9 @@ export default function MusicPlayer() {
                     <h3>About this song</h3>
                     <p>&emsp;{songArr[songIndex]["about"]}</p>
                 </div>
-                <canvas id="visualizer" className="visualizer"></canvas>
             </div>
+            <Visualizer visualizerStyle={{}}/>
         </>
         
     );
-}
-
-var MEDIA_ELEMENT_NODES = new WeakMap();
-let audioHistory = null;
-let audioSrc, analyzer;
-let contextInitialized = false;
-
-function visualizeAudio(data, canvas){
-    if (audioHistory !== data){
-        audioHistory = data;
-        canvas.width = document.body.scrollWidth;
-        canvas.height = 0.2 * document.body.scrollHeight;
-        const ctx = canvas.getContext('2d');
-        let audioContext;
-        if (audioContext == undefined) {
-            audioContext = new AudioContext();
-        }
-        if (MEDIA_ELEMENT_NODES.has(data)) {
-            audioSrc = MEDIA_ELEMENT_NODES.get(data);
-        } else {
-            if (!contextInitialized){
-                audioSrc = audioContext.createMediaElementSource(data);
-                MEDIA_ELEMENT_NODES.set(data, audioSrc);
-                contextInitialized = true;
-            }
-        }
-        analyzer = audioContext.createAnalyser();
-        audioSrc.connect(analyzer);
-        analyzer.connect(audioContext.destination);
-        analyzer.fftSize = 128;
-
-        const bufferLength = analyzer.frequencyBinCount;
-        const dataArray = new Uint8Array(bufferLength);
-
-        const barWidth = canvas.width/bufferLength;
-        let barHeight;
-        let x;
-
-        function animate() {
-            x = 0;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            analyzer.getByteFrequencyData(dataArray);
-            for (let i = 0; i < bufferLength; i++){
-                barHeight = dataArray[i];
-                ctx.fillStyle = 'white';
-                ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-                x+= barWidth + 10; // add gap
-            }
-            requestAnimationFrame(animate);
-        }
-        animate();
-    }
 }

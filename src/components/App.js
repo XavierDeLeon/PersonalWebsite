@@ -5,8 +5,8 @@ import MusicSection from './music/music.js';
 
 export default function App() {
 
-  const [pageIndex, updatePageIndex] = useState(0);
-  const pages = ["header", "about", "music"];
+  const [pageIndex, updatePageIndex] = useState(1);
+  const pages = ["about", "header",  "music"];
 
   const prevPage = () => {
     if (pageIndex - 1 > 0) {
@@ -24,6 +24,7 @@ export default function App() {
     }
   }
 
+  //refactor arrows into separate js file
   return (
     <div className="App">
       <div className="previous-page-arrow" onClick={prevPage} style={{
@@ -60,7 +61,7 @@ export default function App() {
       </div>
 
       <div className="next-page-arrow" onClick={nextPage} style={{
-        display: pageIndex > 0 && pageIndex !== pages.length - 1 ? "flex" : "none"
+        display: pageIndex >= 0 && pageIndex !== pages.length - 1 ? "flex" : "none"
       }}>&#x203A;</div>
     </div>
   );

@@ -10,6 +10,7 @@
 }
 
 .next-page-arrow, .previous-page-arrow {
+    z-index: 2;
     font-size: calc(100px + 2vmin);
     color: #918D91;
     width: 10%;

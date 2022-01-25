@@ -84,27 +84,20 @@ export default function MusicPlayer() {
 
     return (
         <>
-            <div className="music-container">
-                <div className="music-player">
-                    <div className="left-arrow" onClick={prevSong}>&#x2190;</div>
-                    <div ref={playerElem} id="player" 
-                        className="player" 
-                        style={{
-                            backgroundImage: `url(${songArr[songIndex]["image"]})`,
-                            backgroundSize: "contain",
-                            height: `${height}px`
-                        }} 
-                        onClick={playOrStop}
-                    >
-                        <audio id="src" src={songArr[songIndex]["audio"]} controls/>
-                    </div>
-                    <div className="right-arrow" onClick={nextSong}>&#x2192;</div>
+            <div class="controls">
+                
+                <div ref={playerElem} id="player" className="player" >
+                    <img id="album-art" src={songArr[songIndex]["image"]}></img>
                 </div>
-                <div className="music-player-details">
-                    <h2 id="music-title">{songArr[songIndex]["title"]}</h2>
-                    <hr></hr>
-                    <h3>About this song</h3>
-                    <p>&emsp;{songArr[songIndex]["about"]}</p>
+                <div class="audio-player">
+                    <div className="details">
+                        <h2>{songArr[songIndex]["title"]}</h2>
+                        <div className="arrows">
+                            <div className="right-arrow" onClick={prevSong}>&#171;</div>
+                            <div className="right-arrow" onClick={nextSong}>&#187;</div>
+                        </div>
+                    </div>
+                    <audio id="src" src={songArr[songIndex]["audio"]} controls/>
                 </div>
             </div>
             <Visualizer visualizerStyle={{}}/>

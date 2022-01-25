@@ -39,12 +39,7 @@ export default function App() {
         }}>
           <div className="Header">
           <header className="Header-site">
-            <h1 className="Header-text">X.O&ensp;
-              <span className="Header-scroll-for-more" onClick={nextPage}>Click for more&nbsp;</span>
-              <span className='Header-caret-right-1'>&gt;</span>
-              <span className='Header-caret-right-2'>&gt;</span>
-              <span className='Header-caret-right-3'>&gt;</span>
-            </h1>
+            <h1 className="Header-text">X.O</h1>
           </header>
         </div>
         </div>

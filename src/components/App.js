@@ -1,5 +1,5 @@
 import './App.css';
-import { useRef, useEffect, useState } from "react";
+import { useState } from "react";
 import About from './about/about.js';
 import MusicSection from './music/music.js';
 
@@ -14,7 +14,6 @@ export default function App() {
     } else {
       updatePageIndex(0);
     }
-    console.log(pageIndex);
   }
 
   const nextPage = () => {
@@ -23,12 +22,11 @@ export default function App() {
     } else {
       updatePageIndex(pages.length - 1);
     }
-    console.log(pageIndex);
   }
 
   return (
     <div className="App">
-      <div class="previous-page-arrow" onClick={prevPage} style={{
+      <div className="previous-page-arrow" onClick={prevPage} style={{
         display: pageIndex > 0 ? "flex" : "none"
       }}>&#x2039;</div>
 
@@ -36,7 +34,7 @@ export default function App() {
         width: pageIndex > 0 ? "80%" : "100%"
       }}>
         <div className="header-container" style={{
-          display: pages[pageIndex] === "header" ? "block" : "none"
+          display: pages[pageIndex] === "header" ? "block" : "none", 
         }}>
           <div className="Header">
           <header className="Header-site">
@@ -50,18 +48,18 @@ export default function App() {
         </div>
         </div>
         <div className="about-container" style={{
-          display: pages[pageIndex] === "about" ? "block" : "none"
+          display: pages[pageIndex] === "about" ? "block" : "none",
         }}>
           <About />
         </div>
         <div className="music-section-container" style={{
-          display: pages[pageIndex] === "music" ? "block" : "none"
+          display: pages[pageIndex] === "music" ? "block" : "none", 
         }}>
           <MusicSection />
         </div>
       </div>
 
-      <div class="next-page-arrow" onClick={nextPage} style={{
+      <div className="next-page-arrow" onClick={nextPage} style={{
         display: pageIndex > 0 && pageIndex !== pages.length - 1 ? "flex" : "none"
       }}>&#x203A;</div>
     </div>

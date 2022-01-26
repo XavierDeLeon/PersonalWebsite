@@ -1,0 +1,84 @@
+.custom-controls-container {
+    z-index: 3;
+    color: #f5fbef;
+    background-color: #040f0f;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.image-container {
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.image-container img{
+
+    box-shadow: 0px 0px 10px #040f0f;
+
+    height: 100%;
+    width: 100%;
+    
+    max-height: 250px;
+    max-width: 250px;
+}
+
+.custom-controls-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.button-group:first-child > p { 
+    padding-left: 10px;
+    margin-right: auto; 
+}
+
+.button-group:last-child > button { 
+    margin-right: 10px;
+    margin-left: auto; 
+}
+
+.custom-controls-buttons .button-group{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-controls-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.custom-controls-details p{
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-weight: 200;
+}
+
+.custom-controls-buttons {
+    align-self: center;
+    justify-self: center;
+}
+
+.custom-controls-track {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.custom-controls-track span{
+    padding: 0 10px;
+}
+
+.custom-controls-track input{
+    flex: 1;
+    align-self: stretch;
+    margin-right: 10px;
+}

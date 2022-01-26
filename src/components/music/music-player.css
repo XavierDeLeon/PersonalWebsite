@@ -19,7 +19,8 @@
 }
 
 .controls {
-    background-color: black;
+    background-color: #040f0f;
+    color: #f5fbef;
     z-index: 99;
     position: absolute;
     bottom: 0;
@@ -31,7 +32,7 @@
     flex-direction: row;
     align-items: flex-end;
 
-    border: 2px solid black;
+    border: 2px solid #040f0f;
 
 }
 
@@ -62,20 +63,29 @@
     max-height: 450px;
 }
 
-.controls .details h2{
+.controls .details {
+    display: flex;
+    flex-direction: row;
+}
+
+.controls .details .text {
     width: 50%;
-    font-size: calc(20px + 2vmin);
-    font-weight: 200;
     margin-top: 0;
-    padding-top: 15px;
     padding-left: 15px;
     padding-bottom: 15px;
     justify-self: center;
 }
 
-.controls .details {
-    display: flex;
-    flex-direction: row;
+.controls .details h2{
+    margin-top: 0;
+    font-size: calc(12px + 2vmin);
+    font-weight: 200;
+}
+
+.controls .details p{
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-weight: 200;
 }
 
 .controls .arrows {
@@ -111,6 +121,11 @@
 
 audio::-webkit-media-controls-enclosure {
     border-radius: 0 !important;
+    color: #040f0f;
+}
+
+audio::-webkit-media-controls-slider-container {
+    color: #f5fbef;
 }
 
 .music-player-details p {

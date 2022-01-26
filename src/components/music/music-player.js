@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import "./music-player.css";
 import Visualizer from "./visualizer";
+import CustomControls from "./custom-controls";
 
 // A Place to Call Home
 import aPlaceToCallHomeUrl from "../../assets/audio/A-Place-to-Call-Home.mp3"
@@ -11,12 +12,12 @@ import cometImgUrl from "../../assets/images/Comet.jpg"
 // Smile
 import smileUrl from "../../assets/audio/Smile.mp3"
 import smileImgUrl from "../../assets/images/Smile.jpg"
-import CustomControls from "./custom-controls";
+// A Trail Under the Stars
+import aTrailUnderTheStarsUrl from "../../assets/audio/A-Trail-Under-the-Stars.mp3";
+import aTrailUnderTheStarsImgUrl from "../../assets/images/A-Trail-Under-the-Stars.jpg";
 
 export default function MusicPlayer() {
 
-    // music navigation vars
-    const [songIndex, updateSongIndex] = useState(0);
     const songArr = [ //important: tracklist goes in order
         {
             "title": "A Place to Call Home", 
@@ -38,6 +39,13 @@ export default function MusicPlayer() {
             "audio": smileUrl, 
             "image": smileImgUrl,
             "about": "I actually wrote this one to cheer myself up. Things weren't working out as I hoped and I got into a little bit of a slump. I watched Kiki's Delivery Service and something about that inspired me to make this song to remind myself to smile. Hence the sound clips and album art."
+        },
+        {
+            "title": "A Trail Under the Stars",
+            "artist": "X.O",
+            "audio": aTrailUnderTheStarsUrl, 
+            "image": aTrailUnderTheStarsImgUrl,
+            "about": ""
         },
     ];
 

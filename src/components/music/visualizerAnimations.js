@@ -28,7 +28,7 @@ function visualizerAnimations() {
                 );
 
                 // REFLECTION
-                ctx.fillStyle = "#ADADAD";
+                ctx.fillStyle = `rgba(255, 255, 255, 0.5)`;
 
                 //bottom right
                 ctx.fillRect(

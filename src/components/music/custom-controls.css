@@ -8,37 +8,51 @@
     width: 100%;
 }
 
+/**********************************************MAIN BODY DESIGN**********************************************/
 .image-container {
     z-index: 3;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 100%;
     width: 100%;
 }
 
+.image-container div { 
+    margin-top: auto; 
+}
+
+.image-container h2 { 
+    margin-bottom: auto; 
+}
+
 .image-container img{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     box-shadow: 0px 0px 10px #040f0f;
-
     height: 100%;
     width: 100%;
-    
     max-height: 250px;
     max-width: 250px;
 }
 
+/**********************************************CUSTOM CONTROLS (UPPER HALF) DESIGN**********************************************/
 .custom-controls-buttons {
     display: flex;
     flex-direction: row;
+    max-height: 81px;
+    overflow: hidden;
 }
 
-.button-group:first-child > p { 
+/* .button-group:first-child > button { 
     padding-left: 10px;
     margin-right: auto; 
-}
+} */
 
-.button-group:last-child > button { 
+.button-group:last-child > div { 
     margin-right: 10px;
     margin-left: auto; 
 }
@@ -62,11 +76,79 @@
     font-weight: 200;
 }
 
+/**********************************************BUTTON GROUP DESIGN**********************************************/
 .custom-controls-buttons {
     align-self: center;
     justify-self: center;
 }
 
+.play-button, .pause-button {
+    font-size: calc(24px + 2vmin);
+    color: #f5fbef;
+    background-color: #040f0f;
+    cursor: pointer;
+    border: none;
+    margin: 15px 0px ;
+    max-width: 51px;
+    overflow: hidden;
+}
+
+.prev-button, .next-button {
+    font-size: calc(12px + 2vmin);
+    color: #f5fbef;
+    background-color: #040f0f;
+    cursor: pointer;
+    border: none;
+    margin: 15px 0px ;
+    max-width: 51px;
+    overflow: hidden;
+}
+
+.repeat-button {
+    font-size: calc(8px + 2vmin);
+    color: #f5fbef;
+    background-color: #040f0f;
+    cursor: pointer;
+    border: none;
+    margin: 15px 0px ;
+    max-width: 51px;
+    overflow: hidden;
+}
+
+.repeat-button.selected {
+    font-size: calc(8px + 2vmin);
+    color: #040f0f;
+    background-color: #f5fbef;
+    cursor: pointer;
+    border: none;
+    margin: 15px 0px ;
+    max-width: 51px;
+    border-radius: 15%;
+    overflow: hidden;
+}
+
+.playlist-toggle {
+    font-size: calc(8px + 2vmin);
+    color: #f5fbef;
+    background-color: #040f0f;
+    cursor: pointer;
+    border: none;
+    margin: 15px 0px ;
+}
+
+.play-button:hover, .pause-button:hover {
+    font-size: calc(26px + 2vmin);
+}
+
+.prev-button, .shuffle-button {
+    margin-right: 25px;
+}
+
+.next-button, .repeat-button {
+    margin-left: 25px;
+}
+
+/**********************************************SLIDER GROUP DESIGN**********************************************/
 .custom-controls-track {
     display: flex;
     flex-direction: row;

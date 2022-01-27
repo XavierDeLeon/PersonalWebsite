@@ -9,9 +9,13 @@
     flex-direction: row;
 }
 
+.page-container {
+  width: 100%;
+}
+
 .next-page-arrow, .previous-page-arrow {
     z-index: 2;
-    font-size: calc(100px + 2vmin);
+    font-size: calc(180px + 2vmin);
     color: #918D91;
     width: 10%;
     height: 100vh;
@@ -42,78 +46,128 @@
     text-align: center;
   }
   
-  .Header-site {
-    font-size: calc(50px + 2vmin);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .Header-text{
-    margin-bottom: 0;
-  }
-  
-  .Header-scroll-for-more {
-    margin-top: 0;
-    font-size: calc(10px + 2vmin);
-    cursor: pointer;
-    user-select: none;
-  }
-  
-  .Header-caret-down-block{
-    font-size: calc(5px + 2vh);
-  }
-  
-  .Header-caret-right-1{
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: calc(10px + 2vmin);
+.Header-site {
+  font-size: calc(96px + 2vmin);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.Header-site div{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Header-site:first-child span{
+  margin-top: auto; 
+}
+
+.Header-caret-down-block {
+  position: absolute;
+  width: 100%;
+  padding-bottom: 40px;
+  bottom: 0;
+  font-size: calc(10px + 2vh);
+  cursor: pointer;
+}
+
+.return-to-home {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+}
+
+.return-to-home .caret-up{
+  font-size: calc(10px + 2vh);
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.return-to-home .caret-up span{
+  font-size: calc(8px + 2vh);
+  margin-top: 10px;
+  margin-bottom: 0;
+  vertical-align: bottom;
+}
+
+.return-to-home .caret-up i{
+  font-size: calc(8px + 2vh);
+  padding-right: 15px;
+}
+
+.return-to-home .return-text{
+  font-size: calc(10px + 2vh);
+  margin-top: 0px;
+}
+
+.Header-caret-down-block:hover {
+  font-size: calc(16px + 2vh);
+  background-image: linear-gradient(#040f0f, #092020);
+}
+
+.Header-scroll-for-more {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 10px;
+  user-select: none;
+}
+
+.Header-caret-down-1{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: calc(10px + 2vmin);
+  animation: flickerAnimation 1s infinite;
+}
+
+.Header-caret-down-2{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: calc(10px + 2vmin);
+  animation: flickerAnimation 1s infinite;
+  animation-delay: 0.1s;
+}
+
+.Header-caret-down-3{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: calc(10px + 2vmin);
+  animation: flickerAnimation 1s infinite;
+  animation-delay: 0.2s;
+}
+
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-o-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes flickerAnimation{
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+
+.animate-flicker {
+    -webkit-animation: flickerAnimation 1s infinite;
+    -moz-animation: flickerAnimation 1s infinite;
+    -o-animation: flickerAnimation 1s infinite;
     animation: flickerAnimation 1s infinite;
-  }
-  
-  .Header-caret-right-2{
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: calc(10px + 2vmin);
-    animation: flickerAnimation 1s infinite;
-    animation-delay: 0.1s;
-  }
-  
-  .Header-caret-right-3{
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: calc(10px + 2vmin);
-    animation: flickerAnimation 1s infinite;
-    animation-delay: 0.2s;
-  }
-  
-  @keyframes flickerAnimation {
-    0%   { opacity:1; }
-    50%  { opacity:0; }
-    100% { opacity:1; }
-  }
-  @-o-keyframes flickerAnimation{
-    0%   { opacity:1; }
-    50%  { opacity:0; }
-    100% { opacity:1; }
-  }
-  @-moz-keyframes flickerAnimation{
-    0%   { opacity:1; }
-    50%  { opacity:0; }
-    100% { opacity:1; }
-  }
-  @-webkit-keyframes flickerAnimation{
-    0%   { opacity:1; }
-    50%  { opacity:0; }
-    100% { opacity:1; }
-  }
-  
-  .animate-flicker {
-     -webkit-animation: flickerAnimation 1s infinite;
-     -moz-animation: flickerAnimation 1s infinite;
-     -o-animation: flickerAnimation 1s infinite;
-      animation: flickerAnimation 1s infinite;
-  }
+}
   

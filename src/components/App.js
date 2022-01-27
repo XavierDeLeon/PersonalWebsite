@@ -5,15 +5,11 @@ import MusicSection from './music/music.js';
 
 export default function App() {
 
-  const [pageIndex, updatePageIndex] = useState(1);
-  const pages = ["about", "header",  "music"];
+  const [pageIndex, updatePageIndex] = useState(0);
+  const pages = ["header",  "music"];
 
-  const prevPage = () => {
-    if (pageIndex - 1 > 0) {
-      updatePageIndex(pageIndex - 1);
-    } else {
+  const goHome = () => {
       updatePageIndex(0);
-    }
   }
 
   const nextPage = () => {
@@ -27,19 +23,25 @@ export default function App() {
   //refactor arrows into separate js file
   return (
     <div className="App">
-      <div className="previous-page-arrow" onClick={prevPage} style={{
-        display: pageIndex > 0 ? "flex" : "none"
-      }}>&#x2039;</div>
 
-      <div className="page-container" style={{
-        width: pageIndex > 0 ? "80%" : "100%"
-      }}>
+      <div className='return-to-home' style={{display: pageIndex === 0 ? "none" : "block"}}>
+        <p className='caret-up' onClick={goHome}><span>Return</span>&ensp;<i class="fa-solid fa-turn-up"></i></p>
+      </div>
+      <div className="page-container">
         <div className="header-container" style={{
           display: pages[pageIndex] === "header" ? "block" : "none", 
         }}>
           <div className="Header">
           <header className="Header-site">
-            <h1 className="Header-text">X.O</h1>
+            <div className="placeholder"><span>&nbsp;</span></div>
+            <div className="Header-text">
+              <h1>X.O</h1>
+            </div>
+            <div className="placeholder"><span>&nbsp;</span></div>
+            <div className="Header-caret-down-block" onClick={nextPage}>
+              <p className="Header-scroll-for-more">Continue to song gallery</p>
+              <p className="Header-caret-down-1"><i className="fas fa-caret-down"></i></p>
+            </div>
           </header>
         </div>
         </div>
@@ -55,9 +57,7 @@ export default function App() {
         </div>
       </div>
 
-      <div className="next-page-arrow" onClick={nextPage} style={{
-        display: pageIndex >= 0 && pageIndex !== pages.length - 1 ? "flex" : "none"
-      }}>&#x203A;</div>
+
     </div>
   );
 }

@@ -1,7 +1,8 @@
 .custom-controls-container {
     z-index: 3;
     color: #f5fbef;
-    background-color: #040f0f;
+    /* background-color: #040f0f; */
+    background-color: rgba(4, 15, 15, 0.7); /*rgb value of #040f0f*/
     position: absolute;
     bottom: 0;
     left: 0;
@@ -85,7 +86,7 @@
 .play-button, .pause-button {
     font-size: calc(24px + 2vmin);
     color: #f5fbef;
-    background-color: #040f0f;
+    background-color: rgba(0, 0, 0, 0); /*transparent*/
     cursor: pointer;
     border: none;
     margin: 15px 0px ;
@@ -96,7 +97,7 @@
 .prev-button, .next-button {
     font-size: calc(12px + 2vmin);
     color: #f5fbef;
-    background-color: #040f0f;
+    background-color: rgba(0, 0, 0, 0); /*transparent*/
     cursor: pointer;
     border: none;
     margin: 15px 0px ;
@@ -107,7 +108,7 @@
 .repeat-button {
     font-size: calc(8px + 2vmin);
     color: #f5fbef;
-    background-color: #040f0f;
+    background-color: rgba(0, 0, 0, 0); /*transparent*/
     cursor: pointer;
     border: none;
     margin: 15px 0px ;
@@ -117,7 +118,7 @@
 
 .repeat-button.selected {
     font-size: calc(8px + 2vmin);
-    color: #040f0f;
+    color: rgba(4, 15, 15, 0.7); /*rgb value of #040f0f*/
     background-color: #f5fbef;
     cursor: pointer;
     border: none;
@@ -130,7 +131,7 @@
 .playlist-toggle {
     font-size: calc(8px + 2vmin);
     color: #f5fbef;
-    background-color: #040f0f;
+    background-color: rgba(0, 0, 0, 0); /*transparent*/
     cursor: pointer;
     border: none;
     margin: 15px 0px ;

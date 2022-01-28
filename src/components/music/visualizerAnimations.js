@@ -1,30 +1,35 @@
 function visualizerAnimations() {
-    let func = null;
 
     return {
-        default: (ctx, canvas, bufferLength, x, barWidth, dataArray) => {
-            let originalX = x;
-            let topLeftX = (canvas.width / 2);
-            let topRightX = originalX + (canvas.width / 2);
-            let bottomRightX = originalX + (canvas.width / 2);
-            let bottomLeftX = (canvas.width / 2);
+        default: (ctx, canvas, bufferLength, barWidth, dataArray) => {
+            let horizontalScale = 0.5;
+            let verticalScale = 0.5;
+            let reflectionCompressionRatio = 0.5;
+            let padding = 5;
 
+            let topLeftX = (canvas.width / 2) - padding/2;
+            let topRightX = (canvas.width / 2) + padding/2;
+            let bottomLeftX = (canvas.width / 2) - padding/2;
+            let bottomRightX = (canvas.width / 2) + padding/2;
+
+            // we floor all the coordinates for better performance, canvas doesn't like floating-point coordinates
             for (let i = 0; i < bufferLength; i++){
                 let barHeight = dataArray[i];
-                ctx.fillStyle = 'white';
+                ctx.fillStyle = '#f5fbef';
                 //top right
                 ctx.fillRect(
-                    topRightX, // x
-                    canvas.height / 2, // y start from bottom of screen
-                    barWidth * 0.5, // width
-                    (barHeight * -1) * 0.5// height is multiplied by negative to go upwards
+                    ~~(topRightX), // x
+                    ~~(canvas.height / 2), // y start from half of screen
+                    ~~(barWidth * horizontalScale), // width
+                    ~~((barHeight * -1) * verticalScale) // height is multiplied by negative to go upwards
                 );
+
                 //top left
                 ctx.fillRect(
-                    topLeftX, // x
-                    canvas.height / 2, // y start from bottom of screen
-                    barWidth * 0.5, // width
-                    (barHeight * -1) * 0.5// height is multiplied by negative to go upwards
+                    ~~(topLeftX), // x
+                    ~~(canvas.height / 2), // y start from half of screen
+                    ~~(barWidth * horizontalScale) * -1, // width, negative to draw towards left
+                    ~~((barHeight * -1) * verticalScale)// height is multiplied by negative to go upwards
                 );
 
                 // REFLECTION
@@ -32,24 +37,24 @@ function visualizerAnimations() {
 
                 //bottom right
                 ctx.fillRect(
-                    bottomRightX, // x
-                    canvas.height / 2, // y start from bottom of screen
-                    barWidth * 0.5, // width
-                    barHeight * 0.5// height
+                    ~~(bottomRightX), // x
+                    ~~(canvas.height / 2), // y start from half of screen
+                    ~~(barWidth * horizontalScale), // width
+                    ~~(barHeight * verticalScale * reflectionCompressionRatio) // bottom reflection should be shorter
                 );
 
                 //bottom LEFT
                 ctx.fillRect(
-                    bottomLeftX, // x
-                    canvas.height / 2, // y start from bottom of screen
-                    barWidth * 0.5, // width
-                    barHeight * 0.5// height
+                    ~~(bottomLeftX), // x
+                    ~~(canvas.height / 2), // y start from half of screen
+                    ~~(barWidth * horizontalScale) * -1, // width, negative to draw towards left
+                    ~~(barHeight * verticalScale * reflectionCompressionRatio) // bottom reflection should be shorter
                 );
 
-                topRightX += barWidth * 0.5 + 5; // add gap
-                topLeftX -= barWidth * 0.5 + 5; // add gap
-                bottomRightX += barWidth * 0.5 + 5; // add gap
-                bottomLeftX -= barWidth * 0.5 + 5; // add gap
+                topRightX += ~~(barWidth * horizontalScale) + padding; // add gap
+                topLeftX -= ~~(barWidth * horizontalScale) + padding; // add gap
+                bottomRightX += ~~(barWidth * horizontalScale) + padding; // add gap
+                bottomLeftX -= ~~(barWidth * horizontalScale) + padding; // add gap
             }
         }
     }

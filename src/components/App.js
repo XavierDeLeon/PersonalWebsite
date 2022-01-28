@@ -25,7 +25,9 @@ export default function App() {
     <div className="App">
 
       <div className='return-to-home' style={{display: pageIndex === 0 ? "none" : "block"}}>
-        <p className='caret-up' onClick={goHome}><span>Return</span>&ensp;<i class="fa-solid fa-turn-up"></i></p>
+        <div className='return-text'>
+          <p className='caret-up' onClick={goHome}><span>Return</span>&ensp;<i class="fa-solid fa-turn-up"></i></p>
+        </div>
       </div>
       <div className="page-container">
         <div className="header-container" style={{
@@ -36,6 +38,7 @@ export default function App() {
             <div className="placeholder"><span>&nbsp;</span></div>
             <div className="Header-text">
               <h1>X.O</h1>
+              <p>music</p>
             </div>
             <div className="placeholder"><span>&nbsp;</span></div>
             <div className="Header-caret-down-block" onClick={nextPage}>

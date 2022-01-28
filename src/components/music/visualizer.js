@@ -53,19 +53,17 @@ export default class Visualizer extends React.Component {
         const dataArray = new Uint8Array(bufferLength);
     
         const barWidth = canvas.width/bufferLength;
-        let x;
         let _this = this;
     
         function animate() {
-            x = 0;
             _this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            //color of background
-            _this.ctx.fillStyle = `rgb(${_this.rgb.r}, ${_this.rgb.g}, ${_this.rgb.b})`;
-            _this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // //color of background
+            // _this.ctx.fillStyle = `rgb(${_this.rgb.r}, ${_this.rgb.g}, ${_this.rgb.b})`;
+            // _this.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             _this.analyzer.getByteFrequencyData(dataArray);
-            _this.animations[animationStyle](_this.ctx, canvas, bufferLength, x, barWidth, dataArray);
+            _this.animations[animationStyle](_this.ctx, canvas, bufferLength, barWidth, dataArray);
             requestAnimationFrame(animate);
         }
         animate();
@@ -126,6 +124,7 @@ export default class Visualizer extends React.Component {
                 this.colorMap.set(key, this.getAverageRGB(document.getElementById("album-art")));
             } 
             this.rgb = this.colorMap.get(key);
+            document.getElementsByClassName("App")[0].style.backgroundColor = `rgb(${this.rgb.r}, ${this.rgb.g}, ${this.rgb.b})`;
         };
     }
 

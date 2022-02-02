@@ -152,8 +152,8 @@ export default class CustomControls extends React.Component {
             let formattedCurrentTime = `${~~(currentTime / 60)}:${("0" + (~~currentTime % 60)).slice(-2)}`;
             let formattedDuration = `${~~(duration / 60)}:${("0" + (~~duration % 60)).slice(-2)}`;
             this.setState({
-                duration: duration * 1000, //multiply by 1000 for smoother movement in the slider
-                currentTime: currentTime * 1000, //multiply by 1000 for smoother movement in the slider
+                duration: duration * 1000, // converted to ms for smoother movement in the slider
+                currentTime: currentTime * 1000, // converted to ms for smoother movement in the slider
                 currentTimeString: `${formattedCurrentTime} / ${formattedDuration}`
             });
         }, 100)
@@ -174,7 +174,7 @@ export default class CustomControls extends React.Component {
                 <audio id="src" src={this.state.currentTrack.audio} onLoadedMetadata={this.updateTime} onEnded={this.handleEnded}/>
                 <div className="image-container">
                     <div className="spacer">&nbsp;</div>
-                    <img id="album-art" src={this.state.currentTrack.image}></img>
+                    <img id="album-art" alt={`${this.state.currentTrack.title} artwork`} src={this.state.currentTrack.image}></img>
                     <h2 className="title">{this.state.currentTrack.title}</h2>
                 </div>
                 <div id="custom-controls" className="custom-controls-container">

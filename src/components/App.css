@@ -13,6 +13,8 @@
     align-items: center;
     flex-direction: row;
     font-family: JosefinSans;
+
+    transition : background-color 0.5s ease-in-out;
 }
 
 .page-container {

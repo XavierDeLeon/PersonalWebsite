@@ -36,7 +36,7 @@ export default class Visualizer extends React.Component {
         canvas.height = document.body.scrollHeight;
         this.ctx = canvas.getContext('2d');
         let audioContext;
-        if (audioContext == undefined) {
+        if (audioContext === undefined) {
             audioContext = new AudioContext();
         }
         this.audioSrc = audioContext.createMediaElementSource(audioElem);

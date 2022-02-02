@@ -1,3 +1,8 @@
+@font-face {
+  font-family: JosefinSans;
+  src: url("../assets/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf")
+}
+
 .App{
     /* IE, Firefox, Edge */
     -ms-overflow-style: none;  
@@ -7,6 +12,9 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    font-family: JosefinSans;
+
+    transition : background-color 0.5s ease-in-out;
 }
 
 .page-container {
@@ -47,12 +55,23 @@
   }
   
 .Header-site {
-  font-size: calc(96px + 2vmin);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+}
+
+.Header-site .Header-text h1{
+  font-size: calc(213px + 2vmin);
+  font-weight: 200;
+  margin-bottom: 0;
+}
+
+.Header-site .Header-text p{
+  font-size: calc(72px + 2vmin);
+  font-weight: 200;
+  margin-top: 0;
 }
 
 .Header-site div{
@@ -81,8 +100,10 @@
   top: 0;
   left: 0;
   width: 100%;
-  text-align: right;
-  cursor: pointer;
+}
+
+.return-text {
+  float: right;
 }
 
 .return-to-home .caret-up{
@@ -91,11 +112,16 @@
   margin-bottom: 0;
 }
 
+.return-to-home .caret-up:hover{
+  font-size: calc(14px + 2vh);
+}
+
 .return-to-home .caret-up span{
-  font-size: calc(8px + 2vh);
+  font-size: calc(10px + 2vh);
   margin-top: 10px;
   margin-bottom: 0;
   vertical-align: bottom;
+  cursor: pointer;
 }
 
 .return-to-home .caret-up i{
@@ -110,7 +136,7 @@
 
 .Header-caret-down-block:hover {
   font-size: calc(16px + 2vh);
-  background-image: linear-gradient(#040f0f, #092020);
+  /* background-image: linear-gradient(#040f0f, #092020); */
 }
 
 .Header-scroll-for-more {

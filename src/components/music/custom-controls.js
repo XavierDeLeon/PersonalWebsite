@@ -13,6 +13,7 @@ export default class CustomControls extends React.Component {
         this.playButton = null;
         this.pauseButton = null;
         this.timeSlider = null;
+        this.controlsHeight = 0;
         //time listener
         this.timeListener = null;
 
@@ -21,6 +22,7 @@ export default class CustomControls extends React.Component {
             currentTrack: this.tracks[this.trackIndex],
             autoPlay: false,
             shuffle: false,
+            showPlaylist: false,
             duration: 0,
             currentTime: 0,
             currentTimeString: "0:00 / 0:00"
@@ -34,11 +36,11 @@ export default class CustomControls extends React.Component {
         this.nextSong = this.nextSong.bind(this);
         this.updateTime = this.updateTime.bind(this);
         this.setRepeat = this.setRepeat.bind(this);
+        this.togglePlaylist = this.togglePlaylist.bind(this);
         this.setShuffle = this.setShuffle.bind(this);
         this.goToTrack = this.goToTrack.bind(this);
         this.setTime = this.setTime.bind(this);
         this.handleEnded = this.handleEnded.bind(this);
-        console.log(this.tracks);
     }
 
     componentDidMount() {
@@ -47,12 +49,13 @@ export default class CustomControls extends React.Component {
         this.nextButton = document.getElementById("next");
         this.playButton = document.getElementById("play");
         this.pauseButton = document.getElementById("pause");
-
+        this.controlsHeight = document.getElementById("custom-controls").offsetHeight;
         this.timeSlider = document.getElementById("time-slider");
     }
 
     //note: updateTimer will make this function run every second
     componentDidUpdate() {
+        this.controlsHeight = document.getElementById("custom-controls").offsetHeight;
     }
 
     /**
@@ -73,15 +76,11 @@ export default class CustomControls extends React.Component {
                 currentTrack: this.tracks[this.trackIndex]
             });
         }
-        
-        // console.log("previous song", this.state.currentTrackURL, this.trackIndex);
     }
 
     loadAndPlay() {
         let waitForLoad = setInterval(()=> {
-            console.log("loading");
             if (this.audioElem.readyState > 1) {
-                console.log("loaded");
                 this.playSong();
                 clearInterval(waitForLoad);
             }
@@ -110,7 +109,6 @@ export default class CustomControls extends React.Component {
             playing: true
         });
         this.audioElem.play();
-        console.log("playing song", this.state.currentTrack, this.trackIndex);
     }
 
     pauseSong() {
@@ -118,7 +116,6 @@ export default class CustomControls extends React.Component {
             playing: false
         });
         this.audioElem.pause();
-        console.log("pause song");
     }
 
     setTime() {
@@ -128,6 +125,12 @@ export default class CustomControls extends React.Component {
     setRepeat() {
         this.setState({
             autoPlay: !this.state.autoPlay
+        });
+    }
+
+    togglePlaylist() {
+        this.setState({
+            showPlaylist: !this.state.showPlaylist
         });
     }
 
@@ -142,6 +145,7 @@ export default class CustomControls extends React.Component {
         this.setState({
             currentTrack: this.tracks[this.trackIndex]
         });
+        this.loadAndPlay();
     }
 
     updateTime() {
@@ -152,8 +156,8 @@ export default class CustomControls extends React.Component {
             let formattedCurrentTime = `${~~(currentTime / 60)}:${("0" + (~~currentTime % 60)).slice(-2)}`;
             let formattedDuration = `${~~(duration / 60)}:${("0" + (~~duration % 60)).slice(-2)}`;
             this.setState({
-                duration: duration * 1000, //multiply by 1000 for smoother movement in the slider
-                currentTime: currentTime * 1000, //multiply by 1000 for smoother movement in the slider
+                duration: duration * 1000, // converted to ms for smoother movement in the slider
+                currentTime: currentTime * 1000, // converted to ms for smoother movement in the slider
                 currentTimeString: `${formattedCurrentTime} / ${formattedDuration}`
             });
         }, 100)
@@ -171,33 +175,50 @@ export default class CustomControls extends React.Component {
     render() {
         return (
             <>
-                <audio id="src" src={this.state.currentTrack.audio} onLoadedMetadata={this.updateTime} onEnded={this.handleEnded}/>
-                <div className="image-container">
+                <audio key="srcElement" id="src" src={this.state.currentTrack.audio} onLoadedMetadata={this.updateTime} onEnded={this.handleEnded}/>
+                <div key="imageContainer" className="image-container">
                     <div className="spacer">&nbsp;</div>
-                    <img id="album-art" src={this.state.currentTrack.image}></img>
+                    <img id="album-art" alt={`${this.state.currentTrack.title} artwork`} src={this.state.currentTrack.image}></img>
                     <h2 className="title">{this.state.currentTrack.title}</h2>
                 </div>
-                <div id="custom-controls" className="custom-controls-container">
-                    <div className="custom-controls-buttons">
-                        <div className="button-group">
+                <div key="customControls" id="custom-controls" className="custom-controls-container">
+                    <div key="buttons" className="custom-controls-buttons">
+                        <div key="buttonGroup1" className="button-group"></div>
+                        <div key="buttonGroup2" className="button-group">
+                            <button key="prev" id="prev" className="prev-button" onClick={this.previousSong}><i className="fa fa-step-backward" aria-hidden="true"></i></button>
+                            <button key="play" id="play" className="play-button" onClick={this.playSong} style={{display: this.state.playing ? "none" : "inline-block"}}><i  className="fas fa-play" aria-hidden="true"></i></button>
+                            <button key="pause" id="pause" className="pause-button" onClick={this.pauseSong} style={{display: this.state.playing ? "inline-block" : "none"}}><i className="fa fa-pause" aria-hidden="true"></i></button>
+                            <button key="next" id="next" className="next-button" onClick={this.nextSong}><i className="fa fa-step-forward" aria-hidden="true"></i></button>
                         </div>
-                        <div className="button-group">
-                            <button id="prev" className="prev-button" onClick={this.previousSong}><i className="fa fa-step-backward" aria-hidden="true"></i></button>
-                            <button id="play" className="play-button" onClick={this.playSong} style={{display: this.state.playing ? "none" : "inline-block"}}><i  className="fas fa-play" aria-hidden="true"></i></button>
-                            <button id="pause" className="pause-button" onClick={this.pauseSong} style={{display: this.state.playing ? "inline-block" : "none"}}><i className="fa fa-pause" aria-hidden="true"></i></button>
-                            <button id="next" className="next-button" onClick={this.nextSong}><i className="fa fa-step-forward" aria-hidden="true"></i></button>
-                        </div>
-                        <div className="button-group">
+                        <div key="buttonGroup3" className="button-group">
                             <div>
-                                <button id="repeat" className={this.state.autoPlay ? "repeat-button selected" : "repeat-button"} onClick={this.setRepeat}><i className="fa-solid fa-repeat"></i></button>
-                                <button id="playlist" className="playlist-toggle"><i className="fas fa-list"></i></button>
+                                <button key="repeat" id="repeat" className={this.state.autoPlay ? "repeat-button selected" : "repeat-button"} onClick={this.setRepeat}><i className="fa-solid fa-repeat"></i></button>
+                                <button key="playlist" id="playlist" className={this.state.showPlaylist ? "playlist-toggle selected" : "playlist-toggle"} onClick={this.togglePlaylist}><i className="fas fa-list"></i></button>
                             </div>
                         </div>
                     </div>
-                    <div className="custom-controls-track">
-                        <span id="current-time">{this.state.currentTimeString}</span>
-                        <input id="time-slider" type="range" min="0" max={(this.state.duration) ? this.state.duration : 0} value={this.state.currentTime} onChange={this.setTime}/>
+                    <div key="track" className="custom-controls-track">
+                        <span key="currentTime" id="current-time">{this.state.currentTimeString}</span>
+                        <input key="timeSlider" id="time-slider" type="range" min="0" max={(this.state.duration) ? this.state.duration : 0} value={this.state.currentTime} onChange={this.setTime}/>
                     </div>
+                </div>
+                <div key="playlist" className="playlist-container" style={{
+                    bottom: this.state.showPlaylist ? this.controlsHeight : "-999px",
+                    display: this.state.showPlaylist ? "block" : "none"
+                    }}>
+                    {this.tracks.map((track, trackIndex) => {
+                        let childContainer = <p key={trackIndex}>
+                            {trackIndex + 1}.&emsp;{track.title}
+                            <span key={`${trackIndex}-span`} style={{visibility: trackIndex === this.trackIndex ? "visible" : "hidden"}}>&emsp;
+                                <i className={this.state.playing ? "fa-solid fa-volume-high" : "fa-solid fa-volume-off"}></i>
+                            </span>
+                        </p>
+                        return React.createElement("div", {
+                            key: `${trackIndex}-container`, 
+                            className: trackIndex === this.trackIndex ? "playlist-item playing" : "playlist-item",
+                            onClick: () => this.goToTrack(trackIndex)
+                        }, childContainer)
+                    })}
                 </div>
             </>
             

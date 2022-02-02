@@ -31,7 +31,6 @@ export default class Visualizer extends React.Component {
     }
 
     initAudioContext(audioElem, canvas){
-        console.log("initializing context");
         canvas.width = document.body.scrollWidth;
         canvas.height = document.body.scrollHeight;
         this.ctx = canvas.getContext('2d');
@@ -93,7 +92,6 @@ export default class Visualizer extends React.Component {
         try {
             data = context.getImageData(0, 0, width, height);
         } catch(e) {
-            console.log("not working");
             return defaultRGB;
         }
         

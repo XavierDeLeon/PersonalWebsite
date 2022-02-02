@@ -26,7 +26,7 @@ export default function App() {
 
       <div className='return-to-home' style={{display: pageIndex === 0 ? "none" : "block"}}>
         <div className='return-text'>
-          <p className='caret-up' onClick={goHome}><span>Return</span>&ensp;<i class="fa-solid fa-turn-up"></i></p>
+          <p className='caret-up' onClick={goHome}><span>Return</span>&ensp;<i className="fa-solid fa-turn-up"></i></p>
         </div>
       </div>
       <div className="page-container">

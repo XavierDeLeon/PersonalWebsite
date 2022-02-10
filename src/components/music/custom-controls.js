@@ -1,5 +1,6 @@
 import React from "react";
 import "./custom-controls.css";
+import { getVisualizerKeys } from "./visualizerAnimations";
 
 export default class CustomControls extends React.Component {
 
@@ -7,6 +8,8 @@ export default class CustomControls extends React.Component {
         super(props);
         this.trackIndex = 0; //start from the first track
         this.tracks = props.tracks;
+        this.setVisualizer = props.onChangeVisualizer;
+        this.visualizerKeys = getVisualizerKeys();
         this.audioElem = null;
         this.prevButton = null;
         this.nextButton = null;
@@ -40,6 +43,8 @@ export default class CustomControls extends React.Component {
         this.setShuffle = this.setShuffle.bind(this);
         this.goToTrack = this.goToTrack.bind(this);
         this.setTime = this.setTime.bind(this);
+        this.nextVisualizer = this.nextVisualizer.bind(this);
+        this.previousVisualizer = this.previousVisualizer.bind(this);
         this.handleEnded = this.handleEnded.bind(this);
     }
 
@@ -163,6 +168,30 @@ export default class CustomControls extends React.Component {
         }, 100)
     }
 
+    previousVisualizer() {
+        for (let i = 0; i < this.visualizerKeys.length; i++){
+            if (this.visualizerKeys[i] === this.props.currentVisualizer){
+                this.setVisualizer(
+                    i - 1 < 0
+                    ? this.visualizerKeys[this.visualizerKeys.length - 1]
+                    : this.visualizerKeys[i - 1]
+                );
+            }
+        }
+    }
+
+    nextVisualizer() {
+        for (let i = 0; i < this.visualizerKeys.length; i++){
+            if (this.visualizerKeys[i] === this.props.currentVisualizer){
+                this.setVisualizer(
+                    i + 1 >= this.visualizerKeys.length - 1
+                    ? this.visualizerKeys[0]
+                    : this.visualizerKeys[i + 1]
+                );
+            }
+        }
+    }
+
     handleEnded() {
         if (this.state.autoPlay) {
             this.nextSong();
@@ -183,7 +212,13 @@ export default class CustomControls extends React.Component {
                 </div>
                 <div key="customControls" id="custom-controls" className="custom-controls-container">
                     <div key="buttons" className="custom-controls-buttons">
-                        <div key="buttonGroup1" className="button-group"></div>
+                        <div key="buttonGroup1" className="button-group">
+                            <div className="visualizer-controls">
+                                <button key="prevVisualizer" className="prev-button" onClick={this.nextVisualizer}><i className="fa-solid fa-chevron-left"></i></button>
+                                <span>{this.props.currentVisualizer}</span>
+                                <button key="nextVisualizer" className="next-button" onClick={this.previousVisualizer}><i className="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
                         <div key="buttonGroup2" className="button-group">
                             <button key="prev" id="prev" className="prev-button" onClick={this.previousSong}><i className="fa fa-step-backward" aria-hidden="true"></i></button>
                             <button key="play" id="play" className="play-button" onClick={this.playSong} style={{display: this.state.playing ? "none" : "inline-block"}}><i  className="fas fa-play" aria-hidden="true"></i></button>

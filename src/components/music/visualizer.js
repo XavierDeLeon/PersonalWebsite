@@ -12,21 +12,23 @@ export default class Visualizer extends React.Component {
         this.contextInitialized = false;
         this.animations = animations.visualizerAnimations();
         this.colorMap = new Map();
-        this.state = {
-            visualizerStyle: props.visualizerStyle
-        };
+        this.visualizerStyle = props.visualizerStyle;
     }
 
     componentDidUpdate() {
+        this.visualizerStyle = this.props.visualizerStyle;
         if (document.getElementById("src") && !this.contextInitialized) {
             this.audioElem = document.getElementById("src");
-            this.visualizeAudio(this.audioElem, document.getElementById("visualizer"));
+            this.visualizeAudio(this.audioElem, document.getElementById("visualizer"), this.visualizerStyle);
             this.contextInitialized = true;
             window.addEventListener("resize", () => {
                 //resize
                 document.getElementById("visualizer").width = document.body.scrollWidth;
                 document.getElementById("visualizer").height = document.body.scrollHeight;
             })
+        } else {
+            this.visualizeAudio(this.audioElem, document.getElementById("visualizer"), this.visualizerStyle);
+
         }
     }
 
@@ -44,8 +46,11 @@ export default class Visualizer extends React.Component {
         this.analyzer.connect(audioContext.destination);
     }
 
-    visualizeAudio(audioElem, canvas, animationStyle = "default"){
-        this.initAudioContext(audioElem, canvas);
+    visualizeAudio(audioElem, canvas, animationStyle){
+        console.log(`animation style: ${animationStyle}`);
+        if (!this.contextInitialized) {
+            this.initAudioContext(audioElem, canvas);
+        }
         this.analyzer.fftSize = 128;
     
         const bufferLength = this.analyzer.frequencyBinCount;
@@ -56,10 +61,6 @@ export default class Visualizer extends React.Component {
     
         function animate() {
             _this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // //color of background
-            // _this.ctx.fillStyle = `rgb(${_this.rgb.r}, ${_this.rgb.g}, ${_this.rgb.b})`;
-            // _this.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             _this.analyzer.getByteFrequencyData(dataArray);
             _this.animations[animationStyle](_this.ctx, canvas, bufferLength, barWidth, dataArray);

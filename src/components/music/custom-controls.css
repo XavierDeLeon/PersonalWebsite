@@ -48,10 +48,15 @@
     overflow: hidden;
 }
 
-/* .button-group:first-child > button { 
+.button-group:first-child > div { 
     padding-left: 10px;
     margin-right: auto; 
-} */
+}
+
+.visualizer-controls {
+    display: flex;
+    align-items: center;
+}
 
 .button-group:last-child > div { 
     margin-right: 10px;

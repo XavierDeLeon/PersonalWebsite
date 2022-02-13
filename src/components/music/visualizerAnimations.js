@@ -1,7 +1,7 @@
 function visualizerAnimations() {
 
     return {
-        default: (ctx, canvas, bufferLength, barWidth, dataArray) => {
+        Bars: (ctx, canvas, bufferLength, barWidth, dataArray) => {
             let horizontalScale = 0.5;
             let verticalScale = 0.5;
             let reflectionCompressionRatio = 0.5;
@@ -56,10 +56,56 @@ function visualizerAnimations() {
                 bottomRightX += ~~(barWidth * horizontalScale) + padding; // add gap
                 bottomLeftX -= ~~(barWidth * horizontalScale) + padding; // add gap
             }
+        },
+        Lines: (ctx, canvas, bufferLength, lineLength, dataArray) => {
+            let horizontalScale = 0.5;
+            let verticalScale = 0.5;
+            let reflectionCompressionRatio = 0.5;
+            let padding = 5;
+
+            let rightOriginX = (canvas.width / 2);
+            let lefttOriginX = (canvas.width / 2);
+            let originY = (canvas.height / 2);
+
+            let rightCoordinates = [{x: rightOriginX, y: originY}]
+            let leftCoordinates = [{x: lefttOriginX, y: originY}]
+            
+            // store coordinates
+            for (let i = 0; i < bufferLength; i++){
+                rightOriginX += lineLength;
+                rightCoordinates.push({x: rightOriginX, y: originY - (dataArray[i] * verticalScale)});
+
+                lefttOriginX -= lineLength;
+                leftCoordinates.push({x: lefttOriginX, y: originY - (dataArray[i] * verticalScale)});
+            }
+
+            //draw line
+            for (let i = 0; i + 1 < rightCoordinates.length; i++){
+                // right line
+                ctx.beginPath();
+                ctx.moveTo(rightCoordinates[i].x, rightCoordinates[i].y);
+                ctx.lineTo(rightCoordinates[i + 1].x, rightCoordinates[i + 1].y);
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#f5fbef';
+                ctx.stroke();
+
+                // left line
+                ctx.beginPath();
+                ctx.moveTo(leftCoordinates[i].x, leftCoordinates[i].y - 1);
+                ctx.lineTo(leftCoordinates[i + 1].x, leftCoordinates[i + 1].y - 1);
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = '#f5fbef';
+                ctx.stroke();
+            }
         }
     }
 }
 
+function getVisualizerKeys() {
+    return Object.keys(visualizerAnimations());
+}
+
 export {
-    visualizerAnimations
+    visualizerAnimations,
+    getVisualizerKeys
 }
